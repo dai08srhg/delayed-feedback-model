@@ -1,15 +1,15 @@
 # delayed-feedback-model
 
 ## Overview
-PyTorch implementation of the paper  
+PyTorch implementation of the paper.  
 [Modeling Delayed Feedback in Display Advertising, Olivier Chapelle, KDD2014](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.650.6087&rep=rep1&type=pdf)
 
 ## Dataset
 columns
-- feature1 ... feature_n: categorical feautre column. (Assuming all variables are categorical.)
-- elapsed_day: Days elapsed since click.
-- cv_delay_day: Days delayed from click to conversion. (Only observable if conversions are observed)
-- supervised: conversion label. (If conversions are observed 1)
+- `feature1` ... `feature_n`: Categorical feautre column. (Assuming all variables are categorical.)
+- `elapsed_day`: Days elapsed since click.
+- `cv_delay_day`: Days delayed from click to conversion. (Only observable if conversions are observed)
+- `supervised`: Conversion label. (If conversions are observed 1)
 
 sample dataset
 ```
