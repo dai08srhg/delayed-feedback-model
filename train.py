@@ -40,27 +40,6 @@ def preprocess(df: pd.DataFrame) -> Tuple[OrdinalEncoder, pd.DataFrame]:
     return encoder, df
 
 
-def fix_params(model: DelayedFeedbackModel, layer: str) -> None:
-    """
-    Set requires_grad=False of logistic regression or hazard function
-
-    Args:
-        model (DelayedFeedbackModel): PyTorch model
-        layer (str): 'logistic' or 'hazard'
-    """
-    if layer == 'logistic':
-        for param in model.logistic.parameters():
-            param.requires_grad = False
-        for param in model.hazard_function.parameters():
-            param.requires_grad = True
-
-    if layer == 'hazard':
-        for param in model.logistic.parameters():
-            param.requires_grad = True
-        for param in model.hazard_function.parameters():
-            param.requires_grad = False
-
-
 def get_embedding_size(df: pd.DataFrame, embedding_dim: int) -> List[Tuple[int, int]]:
     """
     Get embedding size
@@ -112,7 +91,7 @@ def train(df: pd.DataFrame):
     model.train()
     for epoch in range(epochs):
         # Optimize params of logistic regression
-        fix_params(model, 'hazard')
+        model.train_logistic_mode()
         for X, y, elapsed_day, cv_delay_day in data_loader:
 
             X = X.to(device)
@@ -131,7 +110,7 @@ def train(df: pd.DataFrame):
             optimizer.step()
 
         # Optimize params of hazard function
-        fix_params(model, 'logistic')
+        model.train_hazard_function_mode()
         for X, y, elapsed_day, cv_delay_day in data_loader:
 
             X = X.to(device)

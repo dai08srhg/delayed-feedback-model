@@ -75,6 +75,26 @@ class DelayedFeedbackModel(nn.Module):
         self.logistic = LogisticRegression(input_dim)
         self.hazard_function = HazardFunction(input_dim)
 
+    def train_logistic_mode(self):
+        """
+        Train logistic regression mode.
+        Set requires_grad of logistic regression to True and hazard function to False.
+        """
+        for param in self.logistic.parameters():
+            param.requires_grad = True
+        for param in self.hazard_function.parameters():
+            param.requires_grad = False
+
+    def train_hazard_function_mode(self):
+        """
+        Train hazard function mode.
+        Set requires_grad of hazard function to True and logistic regression to False.
+        """
+        for param in self.logistic.parameters():
+            param.requires_grad = False
+        for param in self.hazard_function.parameters():
+            param.requires_grad = True
+
     def forward(self, inputs):
         h = self.feature_extractor(inputs)  # embedding
         p = self.logistic(h)
