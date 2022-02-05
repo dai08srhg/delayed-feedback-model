@@ -1,0 +1,13 @@
+# 開発用
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: delayed_feedback_model
+    volumes:
+      - './:/workspace'
+    container_name: delayed_feedback_model
+    tty: true
+    working_dir: '/workspace'
