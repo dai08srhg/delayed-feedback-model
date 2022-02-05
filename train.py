@@ -21,7 +21,7 @@ def load_dataset() -> pd.DataFrame:
 
 def preprocess(df: pd.DataFrame) -> Tuple[OrdinalEncoder, pd.DataFrame]:
     """
-    Encoed categorical feature and fill NaN of cv_delay_day with 0. (negative example cv_delay_day is not used.)
+    Encoed categorical feature and fill NaN in cv_delay_day with 0. (cv_delay_day of negative example is not used.)
 
     Args:
         df: law dataset
