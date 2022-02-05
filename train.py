@@ -21,7 +21,7 @@ def load_dataset() -> pd.DataFrame:
 
 def preprocess(df: pd.DataFrame) -> Tuple[OrdinalEncoder, pd.DataFrame]:
     """
-    Encoed categorical feature and negative example cv_delay_day is not used, so fill it with 0.
+    Encoed categorical feature and fill NaN of cv_delay_day with 0. (negative example cv_delay_day is not used.)
 
     Args:
         df: law dataset
@@ -45,7 +45,7 @@ def fix_params(model: DelayedFeedbackModel, layer: str) -> None:
     Set requires_grad=False of logistic regression or hazard function
 
     Args:
-        model (DelayedFeedbackModel): Pytorch model
+        model (DelayedFeedbackModel): PyTorch model
         layer (str): 'logistic' or 'hazard'
     """
     if layer == 'logistic':

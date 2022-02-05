@@ -18,7 +18,7 @@ class FeatureExtractor(nn.Module):
             [nn.Embedding(unique_size, embedding_dim) for unique_size, embedding_dim in embedding_sizes])
 
     def forward(self, category_inputs):
-        # Encode each variable
+        # Embedding each variable
         h = [embedding_layer(category_inputs[:, i]) for i, embedding_layer in enumerate(self.embedding_layers)]
         # Concat each vector
         h = torch.cat(h, dim=1)  # size = (minibath, embeding_dim * Number of categorical variables)
