@@ -23,3 +23,10 @@ sample dataset
 6         1         1         1           11           8.0           1
 7         3         3         3           32           NaN           0
 ```
+
+## remarks
+In the paper, [feature hashing](https://arxiv.org/abs/0902.2206) is used for vectorization of categorical variables.
+> All the features are mapped into a sparse binary feature vector of dimension 2^24 via the hashing trick [17].
+
+
+In this implementation, embedding layer is used instead of feature hashing for vectorization.
