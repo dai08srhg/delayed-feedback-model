@@ -77,7 +77,7 @@ def train(df: pd.DataFrame):
 
     # Build dataset
     dataset = DfmDataset(df)
-    data_loader = torch.utils.data.DataLoader(dataset, batch_size=4, shuffle=True)
+    data_loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=True)
 
     # Build model
     embedding_sizes = get_embedding_size(df, 5)
@@ -93,7 +93,6 @@ def train(df: pd.DataFrame):
         # Optimize params of logistic regression
         model.train_logistic_mode()
         for X, y, elapsed_day, cv_delay_day in data_loader:
-
             X = X.to(device)
             y = y.to(device)
             elapsed_day = elapsed_day.to(device)
@@ -112,7 +111,6 @@ def train(df: pd.DataFrame):
         # Optimize params of hazard function
         model.train_hazard_function_mode()
         for X, y, elapsed_day, cv_delay_day in data_loader:
-
             X = X.to(device)
             y = y.to(device)
             elapsed_day = elapsed_day.to(device)
