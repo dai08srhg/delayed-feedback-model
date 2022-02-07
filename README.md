@@ -1,4 +1,4 @@
-# delayed-feedback-model
+# Delayed Feedback Model (DFM)
 
 ## Overview
 PyTorch implementation of the paper.  
